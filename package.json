@@ -5,7 +5,7 @@
   "type": "module",
   "main": "script.mjs",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.cjs"
   },
   "keywords": [],
   "author": "",
