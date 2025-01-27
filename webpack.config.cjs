@@ -9,13 +9,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.mjs'], // Ensure Webpack resolves .mjs files
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
