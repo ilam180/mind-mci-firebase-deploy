@@ -27,9 +27,10 @@ const stopButton = document.getElementById("stop-time");
 usernameForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value.trim();
+    console.log(username)
     const docRef = collection(db, "users", username)
     const docSnap = await getDoc(docRef);
-
+    console.log("result retrieved " + username)
     if (!docSnap.exists()) {
         const docRef2 = collection(db, "users")
         await setDoc(doc(docRef2, "users"), {
