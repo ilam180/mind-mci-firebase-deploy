@@ -2,7 +2,7 @@
   "name": "mind-mci-firebase-deploy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "script.mjs",
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
