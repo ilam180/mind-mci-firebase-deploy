@@ -1,17 +1,21 @@
 // Initialize Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDamj2uBYISK3Hlhdl1Y2kfdCjvK3UXZHA",
-    authDomain: "mind-mci-test.firebaseapp.com",
-    projectId: "mind-mci-test",
-    storageBucket: "mind-mci-test.firebasestorage.app",
-    messagingSenderId: "635402846686",
-    appId: "1:635402846686:web:fbe92085b2864a80155d4f",
-    measurementId: "G-LBJ9BT2SRV"
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 let active = false;
@@ -49,6 +53,8 @@ usernameForm.addEventListener("submit", async (e) => {
     }
     controls.style.display = "inline";
 });
+
+
 
 // Handle Start Time
 startButton.addEventListener("click", () => {
@@ -102,4 +108,16 @@ function downloadCSV(arrayOfArrays, filename) {
 
     // Remove the link after the download starts
     document.body.removeChild(link);
+}
+
+function uploadFile(file) {
+    const storage = getStorage(app);
+    const storageRef = ref(storage, 'files/' + file.name);
+    uploadBytes(storageRef, file).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+    }).catch((error) => {
+        console.error("File upload failed: " + error);
+    }).then(() => {
+        console.log("File upload successful!");
+    });
 }
